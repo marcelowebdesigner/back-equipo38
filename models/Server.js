@@ -41,6 +41,9 @@ class Server {
   middelwares() {
     // Cors
     this.app.use(cors());
+
+    // JSON - reading and parsing body
+    this.app.use(express.json());
   }
 
   routes() {
