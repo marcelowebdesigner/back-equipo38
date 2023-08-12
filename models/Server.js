@@ -31,8 +31,8 @@ class Server {
   // eslint-disable-next-line class-methods-use-this
   async dbConnection() {
     try {
-      // await database.authenticate();
-      await database.sync();
+      // await database.sync();
+      await database.sync({ alter: true });
       // to drop all the tables and create again
       // await database.sync({ force: true });
       console.log('Connection to the database was established successfully.');

@@ -51,7 +51,7 @@ export const deleteUserService = async (id) => {
     },
   });
 
-  if (!user) {
+  if (!user || user.us_active === false) {
     throw new Error(`There are no active users with the id ${id}`);
   }
 
