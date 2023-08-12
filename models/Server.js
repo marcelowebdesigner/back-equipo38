@@ -4,13 +4,16 @@ import cors from 'cors';
 import database from '../database/connection.js';
 
 import errorHandlerMiddleware from '../middlewares/error-handler.js';
+
 import routerUsers from '../routes/user.routes.js';
+import routerAuth from '../routes/auth.routes.js';
 
 class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT || 4000;
     this.usersRoute = '/user';
+    this.authRoute = '/auth';
 
     // Database connection
     this.dbConnection();
@@ -48,6 +51,7 @@ class Server {
 
   routes() {
     this.app.use(this.usersRoute, routerUsers);
+    this.app.use(this.authRoute, routerAuth);
   }
 
   listen() {
