@@ -1,10 +1,10 @@
 import { Router } from 'express';
+import { check } from 'express-validator';
 import {
   createUser,
   deleteUser,
   getAllUsers,
 } from '../controllers/user.controller.js';
-import { check } from 'express-validator';
 import fieldsValidator from '../middlewares/fields-validator.js';
 
 const router = Router();

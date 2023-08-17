@@ -1,12 +1,19 @@
-import User from '../models/User.js';
-
 import bcrypt from 'bcryptjs';
+import Person from '../models/Person.js';
+import User from '../models/User.js';
 
 export const getAllService = async () => {
   const users = await User.findAll({
     where: {
       us_active: true,
     },
+    include: [
+      {
+        as: 'person',
+        model: Person,
+        required: false,
+      },
+    ],
   });
 
   if (users.length < 1) {
