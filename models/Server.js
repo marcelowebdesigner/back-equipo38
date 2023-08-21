@@ -7,6 +7,7 @@ import errorHandlerMiddleware from '../middlewares/error-handler.js';
 
 import routerUsers from '../routes/user.routes.js';
 import routerAuth from '../routes/auth.routes.js';
+import routerPerson from '../routes/person.routes.js';
 
 class Server {
   constructor() {
@@ -14,6 +15,7 @@ class Server {
     this.port = process.env.PORT || 4000;
     this.usersRoute = '/user';
     this.authRoute = '/auth';
+    this.personRoute = '/person';
 
     // Database connection
     this.dbConnection();
@@ -31,8 +33,9 @@ class Server {
   // eslint-disable-next-line class-methods-use-this
   async dbConnection() {
     try {
-      // await database.sync();
-      await database.sync({ alter: true });
+      await database.sync();
+      // await database.sync({ alter: true });
+      // await database.authenticate();
       // to drop all the tables and create again
       // await database.sync({ force: true });
       console.log('Connection to the database was established successfully.');
@@ -52,6 +55,7 @@ class Server {
   routes() {
     this.app.use(this.usersRoute, routerUsers);
     this.app.use(this.authRoute, routerAuth);
+    this.app.use(this.personRoute, routerPerson);
   }
 
   listen() {

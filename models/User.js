@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
+import Person from './Person.js';
 
 const User = database.define('user', {
   us_id: {
@@ -19,6 +20,19 @@ const User = database.define('user', {
   us_active: {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
+  },
+});
+
+User.hasOne(Person, {
+  foreignKey: {
+    name: 'pe_fk_user',
+  },
+  sourceKey: 'us_id',
+});
+
+Person.belongsTo(User, {
+  foreignKey: {
+    name: 'pe_fk_user',
   },
 });
 
