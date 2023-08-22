@@ -1,8 +1,9 @@
 import {
   createUserService,
   deleteUserService,
-  getAllService,
+  getAllService
 } from '../services/user.service.js';
+
 
 export const getAllUsers = async (req, res, next) => {
   try {
