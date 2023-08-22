@@ -40,18 +40,3 @@ export const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
-
-export const userLogin = async (req, res, next) => {
-  const { email, password } = req.body;
-
-  try {
-    const loggedInUser = await userLogin(email, password);
-
-    res.status(200).json({
-      message: 'User logged in successfully',
-      user: loggedInUser,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
