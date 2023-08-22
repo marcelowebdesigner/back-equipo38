@@ -1,8 +1,9 @@
 import {
   createUserService,
   deleteUserService,
-  getAllService,
+  getAllService
 } from '../services/user.service.js';
+
 
 export const getAllUsers = async (req, res, next) => {
   try {
@@ -35,6 +36,21 @@ export const deleteUser = async (req, res, next) => {
     const user = await deleteUserService(id);
 
     res.status(200).json({ user });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const userLogin = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const loggedInUser = await userLogin(email, password);
+
+    res.status(200).json({
+      message: 'User logged in successfully',
+      user: loggedInUser,
+    });
   } catch (error) {
     next(error);
   }
