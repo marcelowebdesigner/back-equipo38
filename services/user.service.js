@@ -2,39 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Person from '../models/Person.js';
 import User from '../models/User.js';
-
-export const userLogin = async (email, password) => {
-  // Verificar si el usuario está registrado
-  const user = await User.findOne({
-    where: {
-      us_email: email,
-    },
-  });
-
-  if (!user) {
-    throw new Error(`There are no users with the email ${email} on the database.`);
-  }
-
-  // Verificar si el usuario está activo
-  if (!user.us_active) {
-    throw new Error('The user is inactive. Please contact an administrator.');
-  }
-
-  // Validar contraseña encriptada
-  const isPasswordValid = bcrypt.compareSync(password, user.us_password);
-
-  if (!isPasswordValid) {
-    throw new Error('Incorrect password.');
-  }
-
-  // Generar token JWT
-  const accessToken = generateAccessToken(user.id);
-
-  return {
-    user,
-    token: accessToken,
-  };
-};
+import Experience from '../models/Experience.js';
 
 export const getAllService = async () => {
   const users = await User.findAll({
@@ -45,6 +13,11 @@ export const getAllService = async () => {
       {
         as: 'person',
         model: Person,
+        required: false,
+      },
+      {
+        as: 'experiences',
+        model: Experience,
         required: false,
       },
     ],
