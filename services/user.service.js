@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import Person from '../models/Person.js';
 import User from '../models/User.js';
 import Experience from '../models/Experience.js';
@@ -75,7 +74,3 @@ export const deleteUserService = async (id) => {
 
   return user;
 };
-
-function generateAccessToken(userId) {
-  return jwt.sign({ userId }, process.env.SECRET, { expiresIn: '5m' });
-}
