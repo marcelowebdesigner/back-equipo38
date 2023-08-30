@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Person from '../models/Person.js';
 import User from '../models/User.js';
+import Education from '../models/Education.js';
 
 export const userLogin = async (email, password) => {
   // Verificar si el usuario está registrado
@@ -28,7 +29,7 @@ export const userLogin = async (email, password) => {
   }
 
   // Generar token JWT
-  const accessToken = generateAccessToken(user.id);
+const accessToken = generateAccessToken(user.id);
 
   return {
     user,
@@ -45,6 +46,11 @@ export const getAllService = async () => {
       {
         as: 'person',
         model: Person,
+        required: false,
+      },
+      {
+        as: 'education',
+        model: Education,
         required: false,
       },
     ],
