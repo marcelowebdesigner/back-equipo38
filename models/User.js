@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
 import Person from './Person.js';
+import Education from './Education.js';
 
 const User = database.define('user', {
   us_id: {
@@ -23,6 +24,8 @@ const User = database.define('user', {
   },
 });
 
+
+// Establishes the relationship between User and Person
 User.hasOne(Person, {
   foreignKey: {
     name: 'pe_fk_user',
@@ -33,6 +36,20 @@ User.hasOne(Person, {
 Person.belongsTo(User, {
   foreignKey: {
     name: 'pe_fk_user',
+  },
+});
+
+// Establishes the relationship between User and Education
+User.hasMany(Education, {
+  foreignKey: {
+    name: 'ed_fk_user',
+  },
+  sourceKey: 'us_id',
+});
+
+Education.belongsTo(User, {
+  foreignKey: {
+    name: 'ed_fk_user',
   },
 });
 
