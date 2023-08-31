@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 import Person from '../models/Person.js';
 import User from '../models/User.js';
 import Experience from '../models/Experience.js';
+import Education from '../models/Education.js';
 
 export const getAllService = async () => {
   const users = await User.findAll({
@@ -17,6 +18,11 @@ export const getAllService = async () => {
       {
         as: 'experiences',
         model: Experience,
+        required: false,
+      },
+      {
+        as: 'education',
+        model: Education,
         required: false,
       },
     ],

@@ -9,6 +9,8 @@ import routerUsers from '../routes/user.routes.js';
 import routerAuth from '../routes/auth.routes.js';
 import routerPerson from '../routes/person.routes.js';
 import routerExperience from '../routes/experience.routes.js';
+import routerEducation from '../routes/education.routes.js'
+
 
 class Server {
   constructor() {
@@ -18,6 +20,7 @@ class Server {
     this.authRoute = '/auth';
     this.personRoute = '/person';
     this.experienceRoute = '/experience';
+    this.educationRoute = '/education';
 
     // Database connection
     this.dbConnection();
@@ -35,7 +38,7 @@ class Server {
   // eslint-disable-next-line class-methods-use-this
   async dbConnection() {
     try {
-      await database.sync();
+         await database.sync();
       // await database.sync({ alter: true });
       // await database.authenticate();
       // to drop all the tables and create again
@@ -59,6 +62,8 @@ class Server {
     this.app.use(this.authRoute, routerAuth);
     this.app.use(this.personRoute, routerPerson);
     this.app.use(this.experienceRoute, routerExperience);
+    this.app.use(this.educationRoute, routerEducation);
+
   }
 
   listen() {

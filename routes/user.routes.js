@@ -15,9 +15,7 @@ router.post(
   [
     check('userName', 'username is required').notEmpty(),
     check('email', 'Email is invalid').isEmail(),
-    check('password', 'Password must have at least 8 characters').isLength({
-      min: 8,
-    }),
+    check('password', 'Password must have at least 8 characters').isLength({ min: 8 }),
     fieldsValidator,
   ],
   createUser,
