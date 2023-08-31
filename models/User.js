@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
 import Person from './Person.js';
+import Experience from './Experience.js';
 
 const User = database.define('user', {
   us_id: {
@@ -33,6 +34,19 @@ User.hasOne(Person, {
 Person.belongsTo(User, {
   foreignKey: {
     name: 'pe_fk_user',
+  },
+});
+
+User.hasMany(Experience, {
+  foreignKey: {
+    name: 'ex_fk_user',
+  },
+  sourceKey: 'us_id',
+});
+
+Experience.belongsTo(User, {
+  foreignKey: {
+    name: 'ex_fk_user',
   },
 });
 
