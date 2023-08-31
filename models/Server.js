@@ -8,7 +8,9 @@ import errorHandlerMiddleware from '../middlewares/error-handler.js';
 import routerUsers from '../routes/user.routes.js';
 import routerAuth from '../routes/auth.routes.js';
 import routerPerson from '../routes/person.routes.js';
+import routerExperience from '../routes/experience.routes.js';
 import routerEducation from '../routes/education.routes.js'
+
 
 class Server {
   constructor() {
@@ -17,6 +19,7 @@ class Server {
     this.usersRoute = '/user';
     this.authRoute = '/auth';
     this.personRoute = '/person';
+    this.experienceRoute = '/experience';
     this.educationRoute = '/education';
 
     // Database connection
@@ -58,7 +61,9 @@ class Server {
     this.app.use(this.usersRoute, routerUsers);
     this.app.use(this.authRoute, routerAuth);
     this.app.use(this.personRoute, routerPerson);
+    this.app.use(this.experienceRoute, routerExperience);
     this.app.use(this.educationRoute, routerEducation);
+
   }
 
   listen() {
