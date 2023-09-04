@@ -25,7 +25,6 @@ const User = database.define('user', {
   },
 });
 
-
 // Establishes the relationship between User and Person
 User.hasOne(Person, {
   foreignKey: {
@@ -50,19 +49,20 @@ User.hasMany(Education, {
 Education.belongsTo(User, {
   foreignKey: {
     name: 'ed_fk_user',
-},
-  
+  },
+});
+
 User.hasMany(Experience, {
   foreignKey: {
     name: 'ex_fk_user',
-    },
+  },
   sourceKey: 'us_id',
 });
 
 Experience.belongsTo(User, {
   foreignKey: {
     name: 'ex_fk_user',
-     },
-}); 
+  },
+});
 
 export default User;
