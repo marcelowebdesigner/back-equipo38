@@ -1,10 +1,10 @@
-import { loginUser } from '../services/auth.service.js'; // Cambio aquí
+import { loginUser } from '../services/auth.service.js'; 
 
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const user = await loginUser(email, password); // Cambio aquí
+    const user = await loginUser(email, password); 
 
     res.status(200).json({ user });
   } catch (error) {

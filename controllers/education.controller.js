@@ -7,10 +7,8 @@ import {
   
   export const createEducation = async (req, res, next) => {
     const { id } = req.params;
-  
+    const { formation, institution,location, startDate, endDate, description } = req.body;
     try {
-      const { formation, institution,location, startDate, endDate, description } = req.body;
-  
       const education = await createEducationService(
         id,
         formation,
@@ -54,7 +52,7 @@ import {
     try {
       const result = await deleteEducationService(id);
   
-      res.status(200).json(result);
+      res.status(401).json(result);
     } catch (error) {
       next(error);
     }

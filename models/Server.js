@@ -10,7 +10,7 @@ import routerAuth from '../routes/auth.routes.js';
 import routerPerson from '../routes/person.routes.js';
 import routerExperience from '../routes/experience.routes.js';
 import routerEducation from '../routes/education.routes.js'
-
+import routerCertificate from '../routes/certificate.routes.js'
 
 class Server {
   constructor() {
@@ -21,7 +21,7 @@ class Server {
     this.personRoute = '/person';
     this.experienceRoute = '/experience';
     this.educationRoute = '/education';
-
+    this.certificateRoute = '/certificate';
     // Database connection
     this.dbConnection();
 
@@ -63,7 +63,7 @@ class Server {
     this.app.use(this.personRoute, routerPerson);
     this.app.use(this.experienceRoute, routerExperience);
     this.app.use(this.educationRoute, routerEducation);
-
+    this.app.use(this.certificateRoute, routerCertificate); 
   }
 
   listen() {

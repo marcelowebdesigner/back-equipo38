@@ -3,6 +3,7 @@ import database from '../database/connection.js';
 import Person from './Person.js';
 import Experience from './Experience.js';
 import Education from './Education.js';
+import Certificate from './Certificate.js';
 
 const User = database.define('user', {
   us_id: {
@@ -62,6 +63,19 @@ User.hasMany(Experience, {
 Experience.belongsTo(User, {
   foreignKey: {
     name: 'ex_fk_user',
+  },
+});
+
+User.hasMany(Certificate, {
+  foreignKey: {
+    name: 'ce_fk_user',
+  },
+  sourceKey: 'us_id',
+});
+
+Certificate.belongsTo(User, {
+  foreignKey: {
+    name: 'ce_fk_user',
   },
 });
 
