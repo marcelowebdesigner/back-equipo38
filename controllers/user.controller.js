@@ -8,7 +8,6 @@ import {
 export const getAllUsers = async (req, res, next) => {
   try {
     const users = await getAllService();
-
     res.status(200).json({
       users,
     });
