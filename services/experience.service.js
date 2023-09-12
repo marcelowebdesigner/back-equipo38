@@ -1,4 +1,5 @@
 import Experience from '../models/Experience.js';
+import User from '../models/User.js';
 
 export const createExperienceService = async (
   id,
@@ -8,9 +9,9 @@ export const createExperienceService = async (
   companyName,
   description,
 ) => {
-  const user = await Experience.findOne({
+  const user = await User.findOne({
     where: {
-      ex_fk_user: id,
+      us_id: id,
     },
   });
 

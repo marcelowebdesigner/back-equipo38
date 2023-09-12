@@ -3,34 +3,25 @@ import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
 // import User from './User.js';
 
-const Education = database.define(
-  'education',
+const Certificate = database.define(
+  'certificate',
   {
-    ed_id: {
+    ce_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    ed_formation: {
+    ce_training: {
       type: DataTypes.STRING,
     },
-    ed_institution: {
+    ce_institution: {
       type: DataTypes.STRING,
     },
-    ed_location: {
-      type: DataTypes.STRING,
-    },
-    ed_startData: {
+    ce_year: {
       type: DataTypes.DATE,
-    },
-    ed_endData: {
-        type: DataTypes.DATE,
-      },
-    ed_description: {
-      type: DataTypes.STRING,
     },
   },
   { timestamps: false },
 );
 
-export default Education;
+export default Certificate;
