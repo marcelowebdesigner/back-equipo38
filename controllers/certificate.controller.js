@@ -25,6 +25,7 @@ export const createCertificate = async (req, res, next) => {
 
 export const updateCertificate = async (req, res, next) => {
   const { id } = req.params;
+  
   // eslint-disable-next-line prefer-destructuring
   const body = req.body;
 
