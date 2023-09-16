@@ -25,6 +25,9 @@ const Person = database.define(
     pe_phone: {
       type: DataTypes.INTEGER,
     },
+    pe_image: { 
+      type: DataTypes.STRING, 
+    },
     pe_completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

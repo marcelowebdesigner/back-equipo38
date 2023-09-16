@@ -7,6 +7,7 @@ export const createPersonService = async (
   address,
   email,
   phone,
+  image 
 ) => {
   const user = await Person.findOne({
     where: {
@@ -26,6 +27,7 @@ export const createPersonService = async (
     pe_phone: phone,
     pe_completed: true,
     pe_fk_user: id,
+    pe_image: image, 
   });
 
   return newPerson;
@@ -38,6 +40,7 @@ export const updatePersonService = async (
   address,
   email,
   phone,
+  image 
 ) => {
   const personToUpdate = await Person.findOne({
     where: {
@@ -54,6 +57,7 @@ export const updatePersonService = async (
   personToUpdate.pe_address = address;
   personToUpdate.pe_email = email;
   personToUpdate.pe_phone = phone;
+  personToUpdate.pe_image = image; 
 
   await personToUpdate.save();
 
