@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import {
   createExperience,
   deleteExperience,
+  getExperienceById,
   updateExperience,
 } from '../controllers/experience.controller.js';
 import fieldsValidator from '../middlewares/fields-validator.js';
@@ -11,6 +12,8 @@ const router = Router();
 
 // Function to validate date format "YYYY-MM-DD"
 const isValidDate = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
+
+router.get('/:id', getExperienceById);
 
 // Data must be send YYYY-MM-DD
 router.post(

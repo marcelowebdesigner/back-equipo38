@@ -1,6 +1,16 @@
 import Experience from '../models/Experience.js';
 import User from '../models/User.js';
 
+export const getExperienceByIdService = async (id) => {
+  const experience = await Experience.findByPk(id);
+
+  if (!experience) {
+    throw new Error(`There is no experience with the id ${id}`);
+  }
+
+  return experience;
+};
+
 export const createExperienceService = async (
   id,
   position,
