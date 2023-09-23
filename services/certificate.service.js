@@ -2,10 +2,28 @@ import Certificate from '../models/Certificate.js';
 import User from '../models/User.js';
 
 export const getCertificateByIdService = async (id) => {
-  const certificate = await Certificate.findByPk(id);
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  const certificate = await Certificate.findAll({
+    where: {
+      ce_fk_user: id,
+    },
+  });
 
   if (!certificate) {
-    throw new Error(`There is no certificate with the id ${id}`);
+    throw new Error(`There are no certificate with the id ${id}`);
+  }
+
+  if (certificate.length <= 0) {
+    throw new Error(`Experience table for user with id ${id} is empty`);
   }
 
   return certificate;
@@ -62,6 +80,10 @@ export const updateCertificateService = async (
 export const deleteCertificateService = async (id) => {
   // serch register user id for certificate
   const certificateToDelete = await Certificate.findByPk(id);
+
+  if (!certificateToDelete) {
+    throw new Error(`There are no certificates to delete with the id ${id}`);
+  }
 
   await certificateToDelete.destroy();
 

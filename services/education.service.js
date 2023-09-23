@@ -33,10 +33,28 @@ export const createEducationService = async (
 };
 
 export const getEducationByIdService = async (id) => {
-  const education = await Education.findByPk(id);
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  const education = await Education.findAll({
+    where: {
+      ed_fk_user: id,
+    },
+  });
 
   if (!education) {
-    throw new Error(`There id no education with the id ${id}`);
+    throw new Error(`There are no education with the id ${id}`);
+  }
+
+  if (education.length <= 0) {
+    throw new Error(`Experience table for user with id ${id} is empty`);
   }
 
   return education;
