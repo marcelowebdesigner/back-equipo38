@@ -1,5 +1,15 @@
 import Person from '../models/Person.js';
 
+export const getPersonByIdService = async (id) => {
+  const person = await Person.findByPk(id);
+
+  if (!person) {
+    throw new Error(`There is no person table with the id ${id}`);
+  }
+
+  return person;
+};
+
 export const createPersonService = async (
   id,
   name,

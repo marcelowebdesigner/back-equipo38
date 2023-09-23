@@ -1,7 +1,22 @@
 import {
   createPersonService,
+  getPersonByIdService,
   updatePersonService,
 } from '../services/person.service.js';
+
+export const getPersonById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const person = await getPersonByIdService(id);
+
+    res.status(200).json({
+      person,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const createPerson = async (req, res, next) => {
   const { id } = req.params;
