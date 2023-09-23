@@ -4,18 +4,22 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
+  getUserById,
 } from '../controllers/user.controller.js';
 import fieldsValidator from '../middlewares/fields-validator.js';
 
 const router = Router();
 
+router.get('/:id', getUserById);
 router.get('/', getAllUsers);
 router.post(
   '/new',
   [
     check('userName', 'username is required').notEmpty(),
     check('email', 'Email is invalid').isEmail(),
-    check('password', 'Password must have at least 8 characters').isLength({ min: 8 }),
+    check('password', 'Password must have at least 8 characters').isLength({
+      min: 8,
+    }),
     fieldsValidator,
   ],
   createUser,
