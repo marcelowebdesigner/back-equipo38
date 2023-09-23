@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import {
   createEducation,
   deleteEducation,
+  getEducationById,
   updateEducation,
 } from '../controllers/education.controller.js';
 import fieldsValidator from '../middlewares/fields-validator.js';
@@ -12,6 +13,7 @@ const router = Router();
 // Custom function to validate date format "DD-MM-YYYY"
 const isValidDate = (date) => /^\d{2}-\d{2}-\d{4}$/.test(date);
 
+router.get('/:id', getEducationById);
 router.post(
   '/new/:id',
   [
@@ -31,7 +33,7 @@ router.post(
       return true;
     }),
     check('description', 'description is required').notEmpty(),
-    
+
     fieldsValidator,
   ],
   createEducation,
