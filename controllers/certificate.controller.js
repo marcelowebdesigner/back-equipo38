@@ -1,13 +1,25 @@
 import {
   createCertificateService,
   deleteCertificateService,
+  getCertificateByIdService,
   updateCertificateService,
 } from '../services/certificate.service.js';
 
+export const getCertificateById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const certificate = await getCertificateByIdService(id);
+
+    res.status(200).json({ certificate });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export const createCertificate = async (req, res, next) => {
   const { id } = req.params;
-  const { training, institution, year } =
-    req.body;
+  const { training, institution, year } = req.body;
 
   try {
     const newCertificate = await createCertificateService(
@@ -25,13 +37,14 @@ export const createCertificate = async (req, res, next) => {
 
 export const updateCertificate = async (req, res, next) => {
   const { id } = req.params;
+
   // eslint-disable-next-line prefer-destructuring
   const body = req.body;
 
   try {
     const updatedCertificate = await updateCertificateService(id, body);
 
-    res.status(200).json({ updatedCertificate});
+    res.status(200).json({ updatedCertificate });
   } catch (error) {
     next(error);
   }

@@ -3,6 +3,7 @@ import { check } from 'express-validator';
 import {
   createCertificate,
   deleteCertificate,
+  getCertificateById,
   updateCertificate,
 } from '../controllers/certificate.controller.js';
 import fieldsValidator from '../middlewares/fields-validator.js';
@@ -12,6 +13,7 @@ const router = Router();
 // Custom function to validate date format "DD-MM-YYYY"
 const isValidDate = (date) => /^\d{4}$/.test(date);
 
+router.get('/:id', getCertificateById);
 router.post(
   '/new/:id',
   [
@@ -23,7 +25,7 @@ router.post(
       }
       return true;
     }),
-   
+
     fieldsValidator,
   ],
   createCertificate,

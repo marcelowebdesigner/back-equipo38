@@ -1,6 +1,16 @@
 import Certificate from '../models/Certificate.js';
 import User from '../models/User.js';
 
+export const getCertificateByIdService = async (id) => {
+  const certificate = await Certificate.findByPk(id);
+
+  if (!certificate) {
+    throw new Error(`There is no certificate with the id ${id}`);
+  }
+
+  return certificate;
+};
+
 export const createCertificateService = async (
   id,
   training,
@@ -26,7 +36,6 @@ export const createCertificateService = async (
   return newCertificate;
 };
 
-
 export const updateCertificateService = async (
   id,
   training,
@@ -38,8 +47,6 @@ export const updateCertificateService = async (
       ce_fk_user: id,
     },
   });
-  
- 
 
   if (!certificateToUpdate) {
     throw new Error(`Error. No certificate found with the user id ${id}`);
@@ -53,11 +60,10 @@ export const updateCertificateService = async (
 };
 
 export const deleteCertificateService = async (id) => {
+  // serch register user id for certificate
+  const certificateToDelete = await Certificate.findByPk(id);
 
-    // serch register user id for certificate
-    const certificateToDelete = await Certificate.findByPk(id);
+  await certificateToDelete.destroy();
 
-    await certificateToDelete.destroy();
-
-    return certificateToDelete;
+  return certificateToDelete;
 };

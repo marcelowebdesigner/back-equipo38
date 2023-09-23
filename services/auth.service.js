@@ -1,8 +1,8 @@
-
 import bcryptjs from 'bcryptjs';
 import User from '../models/User.js';
 import generateAccessToken from '../helpers/generatorJwt.js';
 
+// eslint-disable-next-line import/prefer-default-export
 export const loginUser = async (email, password) => {
   // Check if the user is registered
   const user = await User.findOne({
@@ -22,7 +22,7 @@ export const loginUser = async (email, password) => {
     throw new Error('The user is inactive. Please contact an administrator.');
   }
 
-  // Validate encripted password 
+  // Validate encripted password
   const isPasswordValid = bcryptjs.compareSync(password, user.us_password);
 
   if (!isPasswordValid) {
@@ -30,7 +30,7 @@ export const loginUser = async (email, password) => {
   }
 
   // Generate jwt token using previously defined function
-  const accessToken = generateAccessToken(user.id);
+  const accessToken = await generateAccessToken(user.us_id);
 
   return {
     user,

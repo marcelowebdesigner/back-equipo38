@@ -27,7 +27,7 @@ export const getAllService = async () => {
         required: false,
       },
       {
-        as: 'certificate',
+        as: 'certificates',
         model: Certificate,
         required: false,
       },
