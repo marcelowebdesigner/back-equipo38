@@ -58,7 +58,7 @@ export const deleteExperience = async (req, res, next) => {
   try {
     const deletedExperience = await deleteExperienceService(id);
 
-    res.status(410).json({ deletedExperience });
+    res.status(200).json({ deletedExperience });
   } catch (error) {
     next(error);
   }

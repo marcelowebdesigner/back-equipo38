@@ -55,7 +55,7 @@ export const deleteCertificate = async (req, res, next) => {
 
   try {
     const deletedCertificate = await deleteCertificateService(id);
-    res.status(410).json({ deletedCertificate });
+    res.status(200).json({ deletedCertificate });
   } catch (error) {
     next(error);
   }

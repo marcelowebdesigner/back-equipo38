@@ -66,7 +66,7 @@ export const deleteEducation = async (req, res, next) => {
   try {
     const result = await deleteEducationService(id);
 
-    res.status(401).json(result);
+    res.status(200).json(result);
   } catch (error) {
     next(error);
   }
