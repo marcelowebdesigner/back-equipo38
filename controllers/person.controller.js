@@ -1,9 +1,9 @@
 import { createPersonService, updatePersonService } from '../services/person.service.js';
-import Person from '../models/Person.js'; // Importa el modelo Person
+import Person from '../models/Person.js'; 
 import multer from 'multer';
 import path from 'path';
 
-// Configurar multer para guardar las imágenes en una carpeta llamada "uploads"
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
@@ -41,7 +41,7 @@ export const createPerson = async (req, res, next) => {
       lastName,
       address,
       email,
-      phone,
+      phone
     );
 
     res.status(201).json({ person });
