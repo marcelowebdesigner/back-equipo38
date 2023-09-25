@@ -22,7 +22,7 @@ export const createEducation = async (req, res, next) => {
   const { formation, institution, location, startDate, endDate, description } =
     req.body;
   try {
-    const education = await createEducationService(
+    const newEducation = await createEducationService(
       id,
       formation,
       institution,
@@ -32,7 +32,7 @@ export const createEducation = async (req, res, next) => {
       description,
     );
 
-    res.status(201).json({ education });
+    res.status(201).json({ newEducation });
   } catch (error) {
     next(error);
   }
