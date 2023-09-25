@@ -19,10 +19,10 @@ const Education = database.define(
     ed_location: {
       type: DataTypes.STRING,
     },
-    ed_startData: {
+    ed_startDate: {
       type: DataTypes.DATEONLY,
     },
-    ed_endData: {
+    ed_endDate: {
       type: DataTypes.DATEONLY,
     },
     ed_description: {
