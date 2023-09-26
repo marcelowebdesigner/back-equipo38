@@ -19,7 +19,7 @@ export const getEducationById = async (req, res, next) => {
 
 export const createEducation = async (req, res, next) => {
   const { id } = req.params;
-  const { formation, institution, location, startDate, endDate, description } =
+  const { formation, institution, location, startDate, finishDate, description } =
     req.body;
   try {
     const newEducation = await createEducationService(
@@ -28,7 +28,7 @@ export const createEducation = async (req, res, next) => {
       institution,
       location,
       startDate,
-      endDate,
+      finishDate,
       description,
     );
 
@@ -40,7 +40,7 @@ export const createEducation = async (req, res, next) => {
 
 export const updateEducation = async (req, res, next) => {
   const { id } = req.params;
-  const { formation, institution, location, startDate, endDate, description } =
+  const { formation, institution, location, startDate, finishDate, description } =
     req.body;
 
   try {
@@ -50,7 +50,7 @@ export const updateEducation = async (req, res, next) => {
       institution,
       location,
       startDate,
-      endDate,
+      finishDate,
       description,
     );
 
