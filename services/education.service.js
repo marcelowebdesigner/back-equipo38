@@ -6,8 +6,8 @@ export const createEducationService = async (
   formation,
   institution,
   location,
-  startData,
-  endData,
+  startDate,
+  endDate,
   description,
 ) => {
   const user = await User.findOne({
@@ -23,8 +23,8 @@ export const createEducationService = async (
     ed_formation: formation,
     ed_institution: institution,
     ed_location: location,
-    ed_startData: startData,
-    ed_endData: endData,
+    ed_startDate: startDate,
+    ed_endDate: endDate,
     ed_description: description,
     ed_fk_user: id,
   });
@@ -76,7 +76,7 @@ export const updateEducationService = async (
   });
 
   if (!educationToUpdate) {
-    throw new Error(`Error. No person found with the user id ${id}`);
+    throw new Error(`Error. No education found with the user id ${id}`);
   }
 
   if (formation) educationToUpdate.ed_formation = formation;
@@ -91,19 +91,15 @@ export const updateEducationService = async (
 };
 
 export const deleteEducationService = async (id) => {
-  // serch register user id for education
-  const educationToDelete = await Education.findOne({
-    where: {
-      ed_fk_user: id,
-    },
-  });
+  // search register user id for education
+  const educationToDelete = await Education.findByPk(id);
 
   if (!educationToDelete) {
-    throw new Error(`No user education record found with ID ${id}`);
+    throw new Error(`There are no certificates to delete with the id ${id}`);
   }
 
   // Delete register education
   await educationToDelete.destroy();
 
-  return { message: 'Education record successfully removed' };
+  return educationToDelete;
 };
