@@ -22,7 +22,7 @@ const Education = database.define(
     ed_startDate: {
       type: DataTypes.DATEONLY,
     },
-    ed_endDate: {
+    ed_finishDate: {
       type: DataTypes.DATEONLY,
     },
     ed_description: {

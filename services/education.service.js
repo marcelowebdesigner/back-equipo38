@@ -7,7 +7,7 @@ export const createEducationService = async (
   institution,
   location,
   startDate,
-  endDate,
+  finishDate,
   description,
 ) => {
   const user = await User.findOne({
@@ -24,7 +24,7 @@ export const createEducationService = async (
     ed_institution: institution,
     ed_location: location,
     ed_startDate: startDate,
-    ed_endDate: endDate,
+    ed_finishDate: finishDate,
     ed_description: description,
     ed_fk_user: id,
   });
@@ -65,8 +65,8 @@ export const updateEducationService = async (
   formation,
   institution,
   location,
-  startData,
-  endData,
+  startDate,
+  finishDate,
   description,
 ) => {
   const educationToUpdate = await Education.findOne({
@@ -82,8 +82,8 @@ export const updateEducationService = async (
   if (formation) educationToUpdate.ed_formation = formation;
   if (institution) educationToUpdate.ed_institution = institution;
   if (location) educationToUpdate.ed_location = location;
-  if (startData) educationToUpdate.ed_startData = startData;
-  if (endData) educationToUpdate.ed_endData = endData;
+  if (startDate) educationToUpdate.ed_startDate = startDate;
+  if (finishDate) educationToUpdate.ed_finishDate = finishDate;
   if (description) educationToUpdate.ed_description = description;
 
   await educationToUpdate.save();

@@ -26,7 +26,7 @@ router.post(
       }
       return true;
     }),
-    check('endDate', 'end date is invalid ').custom((value) => {
+    check('finishDate', 'finish date is invalid ').custom((value) => {
       if (!isValidDate(value)) {
         throw new Error('Invalid date format. Use YYYY-MM-DD.');
       }
