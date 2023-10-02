@@ -84,6 +84,12 @@ export const createUserService = async (userName, email, password) => {
     },
   });
 
+  if (user && user.dataValues.us_active === false) {
+    throw new Error(
+      `There is already a user with that email, currently INACTIVE. Contact the administrator or sign up with another email address`,
+    );
+  }
+
   if (user) {
     throw new Error(
       `The email address ${email} is already registered. Try to log in with your username and password.`,
