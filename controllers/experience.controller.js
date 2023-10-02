@@ -1,8 +1,21 @@
 import {
   createExperienceService,
   deleteExperienceService,
+  getExperienceByIdService,
   updateExperienceService,
 } from '../services/experience.service.js';
+
+export const getExperienceById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const experience = await getExperienceByIdService(id);
+
+    res.status(200).json({ experience });
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const createExperience = async (req, res, next) => {
   const { id } = req.params;
@@ -45,7 +58,7 @@ export const deleteExperience = async (req, res, next) => {
   try {
     const deletedExperience = await deleteExperienceService(id);
 
-    res.status(410).json({ deletedExperience });
+    res.status(200).json({ deletedExperience });
   } catch (error) {
     next(error);
   }

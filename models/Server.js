@@ -9,8 +9,8 @@ import routerUsers from '../routes/user.routes.js';
 import routerAuth from '../routes/auth.routes.js';
 import routerPerson from '../routes/person.routes.js';
 import routerExperience from '../routes/experience.routes.js';
-import routerEducation from '../routes/education.routes.js'
-import routerCertificate from '../routes/certificate.routes.js'
+import routerEducation from '../routes/education.routes.js';
+import routerCertificate from '../routes/certificate.routes.js';
 
 class Server {
   constructor() {
@@ -38,11 +38,8 @@ class Server {
   // eslint-disable-next-line class-methods-use-this
   async dbConnection() {
     try {
-         await database.sync();
+      await database.sync();
       // await database.sync({ alter: true });
-      // await database.authenticate();
-      // to drop all the tables and create again
-      // await database.sync({ force: true });
       console.log('Connection to the database was established successfully.');
     } catch (error) {
       throw new Error(error);
@@ -63,7 +60,7 @@ class Server {
     this.app.use(this.personRoute, routerPerson);
     this.app.use(this.experienceRoute, routerExperience);
     this.app.use(this.educationRoute, routerEducation);
-    this.app.use(this.certificateRoute, routerCertificate); 
+    this.app.use(this.certificateRoute, routerCertificate);
   }
 
   listen() {

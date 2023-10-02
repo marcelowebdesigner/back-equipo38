@@ -1,6 +1,34 @@
 import Experience from '../models/Experience.js';
 import User from '../models/User.js';
 
+export const getExperienceByIdService = async (id) => {
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  const experience = await Experience.findAll({
+    where: {
+      ex_fk_user: id,
+    },
+  });
+
+  if (!experience) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  if (experience.length <= 0) {
+    throw new Error(`Experience table for user with the id ${id} is empty.`);
+  }
+
+  return experience;
+};
+
 export const createExperienceService = async (
   id,
   position,
@@ -65,6 +93,10 @@ export const updateExperienceService = async (id, body) => {
 
 export const deleteExperienceService = async (id) => {
   const experienceToDelete = await Experience.findByPk(id);
+
+  if (!experienceToDelete) {
+    throw new Error(`There are no saved experience with the id ${id}`);
+  }
 
   await experienceToDelete.destroy();
 

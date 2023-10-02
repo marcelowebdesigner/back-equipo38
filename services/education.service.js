@@ -6,8 +6,8 @@ export const createEducationService = async (
   formation,
   institution,
   location,
-  startData, 
-  endData,
+  startDate,
+  finishDate,
   description,
 ) => {
   const user = await User.findOne({
@@ -23,23 +23,50 @@ export const createEducationService = async (
     ed_formation: formation,
     ed_institution: institution,
     ed_location: location,
-    ed_startData: startData,
-    ed_endData: endData,
-    ed_description : description,
+    ed_startDate: startDate,
+    ed_finishDate: finishDate,
+    ed_description: description,
     ed_fk_user: id,
   });
 
   return newEducation;
 };
 
+export const getEducationByIdService = async (id) => {
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  const education = await Education.findAll({
+    where: {
+      ed_fk_user: id,
+    },
+  });
+
+  if (!education) {
+    throw new Error(`There are no education with the id ${id}`);
+  }
+
+  if (education.length <= 0) {
+    throw new Error(`Experience table for user with id ${id} is empty`);
+  }
+
+  return education;
+};
 
 export const updateEducationService = async (
   id,
   formation,
   institution,
   location,
-  startData,
-  endData,
+  startDate,
+  finishDate,
   description,
 ) => {
   const educationToUpdate = await Education.findOne({
@@ -47,39 +74,32 @@ export const updateEducationService = async (
       ed_fk_user: id,
     },
   });
-  
- 
 
   if (!educationToUpdate) {
-    throw new Error(`Error. No person found with the user id ${id}`);
+    throw new Error(`Error. No education found with the user id ${id}`);
   }
 
   if (formation) educationToUpdate.ed_formation = formation;
   if (institution) educationToUpdate.ed_institution = institution;
   if (location) educationToUpdate.ed_location = location;
-  if (startData) educationToUpdate.ed_startData = startData;
-  if (endData) educationToUpdate.ed_endData = endData;
+  if (startDate) educationToUpdate.ed_startDate = startDate;
+  if (finishDate) educationToUpdate.ed_finishDate = finishDate;
   if (description) educationToUpdate.ed_description = description;
-  
+
   await educationToUpdate.save();
   return educationToUpdate;
 };
 
 export const deleteEducationService = async (id) => {
+  // search register user id for education
+  const educationToDelete = await Education.findByPk(id);
 
-    // serch register user id for education
-    const educationToDelete = await Education.findOne({
-      where: {
-        ed_fk_user: id,
-      },
-    });
+  if (!educationToDelete) {
+    throw new Error(`There are no education to delete with the id ${id}`);
+  }
 
-    if (!educationToDelete) {
-      throw new Error(`No user education record found with ID ${id}`);
-    }
+  // Delete register education
+  await educationToDelete.destroy();
 
-    // Delete register education
-    await educationToDelete.destroy();
-
-    return { message: 'Education record successfully removed' };
+  return educationToDelete;
 };

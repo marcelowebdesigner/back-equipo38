@@ -5,6 +5,42 @@ import Experience from '../models/Experience.js';
 import Education from '../models/Education.js';
 import Certificate from '../models/Certificate.js';
 
+export const getUserByIdService = async (id) => {
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+    include: [
+      {
+        as: 'person',
+        model: Person,
+        required: false,
+      },
+      {
+        as: 'experiences',
+        model: Experience,
+        required: false,
+      },
+      {
+        as: 'education',
+        model: Education,
+        required: false,
+      },
+      {
+        as: 'certificates',
+        model: Certificate,
+        required: false,
+      },
+    ],
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  return user;
+};
+
 export const getAllService = async () => {
   const users = await User.findAll({
     where: {
@@ -27,7 +63,7 @@ export const getAllService = async () => {
         required: false,
       },
       {
-        as: 'certificate',
+        as: 'certificates',
         model: Certificate,
         required: false,
       },
@@ -47,6 +83,12 @@ export const createUserService = async (userName, email, password) => {
       us_email: email,
     },
   });
+
+  if (user && user.dataValues.us_active === false) {
+    throw new Error(
+      `There is already a user with that email, currently INACTIVE. Contact the administrator or sign up with another email address`,
+    );
+  }
 
   if (user) {
     throw new Error(

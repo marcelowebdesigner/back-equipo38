@@ -10,7 +10,8 @@ export default function generateAccessToken(id) {
       payload,
       process.env.SECRETKEY,
       {
-        expiresIn: '15m',
+        // Change token duration to 15 minutes before deploy
+        expiresIn: '30d',
       },
       (error, token) => {
         if (error) {

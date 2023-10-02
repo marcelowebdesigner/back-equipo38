@@ -1,4 +1,29 @@
 import Person from '../models/Person.js';
+import User from '../models/User.js';
+
+export const getPersonByIdService = async (id) => {
+  const user = await User.findByPk(id, {
+    where: {
+      us_active: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error(`There are no active users with the id ${id}`);
+  }
+
+  const person = await Person.findOne({
+    where: {
+      pe_fk_user: id,
+    },
+  });
+
+  if (!person) {
+    throw new Error(`There are no person table with the id ${id}`);
+  }
+
+  return person;
+};
 
 export const createPersonService = async (
   id,

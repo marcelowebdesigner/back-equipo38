@@ -1,4 +1,3 @@
-
 import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
 // import User from './User.js';
@@ -18,7 +17,7 @@ const Certificate = database.define(
       type: DataTypes.STRING,
     },
     ce_year: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
     },
   },
   { timestamps: false },

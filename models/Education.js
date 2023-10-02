@@ -1,4 +1,3 @@
-
 import { DataTypes } from 'sequelize';
 import database from '../database/connection.js';
 // import User from './User.js';
@@ -20,12 +19,12 @@ const Education = database.define(
     ed_location: {
       type: DataTypes.STRING,
     },
-    ed_startData: {
-      type: DataTypes.DATE,
+    ed_startDate: {
+      type: DataTypes.DATEONLY,
     },
-    ed_endData: {
-        type: DataTypes.DATE,
-      },
+    ed_finishDate: {
+      type: DataTypes.DATEONLY,
+    },
     ed_description: {
       type: DataTypes.STRING,
     },
