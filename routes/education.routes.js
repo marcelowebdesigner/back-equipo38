@@ -7,15 +7,17 @@ import {
   updateEducation,
 } from '../controllers/education.controller.js';
 import fieldsValidator from '../middlewares/fields-validator.js';
+import jwtValidator from '../middlewares/validateJwt.js';
 
 const router = Router();
 
 // Custom function to validate date format "DD-MM-YYYY"
 const isValidDate = (date) => /^\d{4}-\d{2}-\d{2}$/.test(date);
 
-router.get('/:id', getEducationById);
+router.get('/:id', jwtValidator, getEducationById);
 router.post(
   '/new/:id',
+  jwtValidator,
   [
     check('formation', 'formation is required').notEmpty(),
     check('institution', 'institution is required').notEmpty(),
@@ -38,7 +40,7 @@ router.post(
   ],
   createEducation,
 );
-router.put('/:id', updateEducation);
-router.delete('/:id', deleteEducation);
+router.put('/:id', jwtValidator, updateEducation);
+router.delete('/:id', jwtValidator, deleteEducation);
 
 export default router;

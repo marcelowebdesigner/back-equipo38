@@ -95,7 +95,7 @@ export const deleteEducationService = async (id) => {
   const educationToDelete = await Education.findByPk(id);
 
   if (!educationToDelete) {
-    throw new Error(`There are no certificates to delete with the id ${id}`);
+    throw new Error(`There are no education to delete with the id ${id}`);
   }
 
   // Delete register education
